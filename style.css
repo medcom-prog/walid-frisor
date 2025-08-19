@@ -1,4 +1,5 @@
 /* WALID FRISØR - CLEAN CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=Bebas+Neue&display=swap');
 
 /* === ROOT VARIABLES === */
 :root {
@@ -17,9 +18,11 @@
     --transition: all 0.3s ease;
     --header-height: 75px;
     --container-width: 1200px;
-    --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Playfair Display', serif;
+
+    --font-primary: 'Bebas Neue', sans-serif;
+    --font-secondary: 'Bebas Neue', sans-serif;
 }
+
 
 /* === RESET & BASE === */
 * {
