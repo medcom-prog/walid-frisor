@@ -49,7 +49,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: var(--secondary-color);
     z-index: 9999;
@@ -802,3 +802,28 @@ section {
     }
 }
 
+/* === FIX: Horisontal scroll på mobil + pen anker-scroll === */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+:target { scroll-margin-top: var(--header-height, 75px); }
+
+/* Media skal aldri sprenge bredden */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Klipp eventuelle “lekasjer” fra seksjoner/containere */
+.header, .hero, .services, .about, .faq, .contact, .footer,
+.container, .embed-wrap, .nav-menu {
+  overflow-x: clip; /* bruk hidden om clip ikke støttes i din target */
+}
+
+/* Setmore-iframe (for sikkerhets skyld) */
+#setmore-embed { width: 100%; max-width: 100%; }
+
+/* Penere høyde til kalenderen (valgfritt) */
+#setmore-embed { min-height: clamp(720px, 100vh - 240px, 1200px); }
