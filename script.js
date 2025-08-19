@@ -127,6 +127,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== SMOOTH SCROLLING =====
+    // Logo click to home
+    const navLogo = document.querySelector('.nav-logo');
+    if (navLogo) {
+        navLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();

@@ -117,14 +117,23 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-.logo-icon {
-    font-size: 1.8rem;
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-image {
+    height: 150px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: var(--transition);
+}
+
+.nav-logo:hover .logo-image {
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px var(--primary-color));
 }
 
 .nav-menu {
@@ -247,7 +256,6 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.4);
 }
 
 .hero-overlay {
