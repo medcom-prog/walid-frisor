@@ -295,6 +295,12 @@
                     <div class="contact-form booking-embed" id="book">
                         <h3>Book din time</h3>
                         <p>Se ledige tider og book direkte i kalenderen under. Hvis rammen ikke vises, kan du åpne booking i ny fane.</p>
+<!-- HINT: vises kun på mobil og kan skjules permanent -->
+<div id="consentTip" class="consent-tip" hidden>
+  <span class="tip-text">Husk å godta personvern nederst i kalenderen</span>
+  <button class="tip-scroll" type="button" aria-label="Scroll ned" title="Scroll ned">⬇️</button>
+  <button class="tip-close" type="button" aria-label="Skjul dette" title="Skjul">✕</button>
+</div>
 
                         <div class="embed-wrap">
                           <iframe
@@ -352,6 +358,37 @@
           }
         }, 4000);
       })();
+
+
+      (function() {
+  const KEY = 'wf_consentTipHidden';
+  const tip = document.getElementById('consentTip');
+  if (!tip) return;
+
+  // Vis hintet kun hvis vi ikke har skjult det tidligere
+  const shouldShow = localStorage.getItem(KEY) !== '1';
+  if (shouldShow) tip.hidden = false;
+
+  // Lukke-knapp: skjul og husk valget
+  tip.querySelector('.tip-close')?.addEventListener('click', () => {
+    tip.hidden = true;
+    localStorage.setItem(KEY, '1');
+  });
+
+  // Pil ned: scroll til bunnen av booking-seksjonen (så samtykke-baren blir synlig)
+  tip.querySelector('.tip-scroll')?.addEventListener('click', () => {
+    const book = document.getElementById('book');
+    if (book) book.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  });
+
+  // Auto-skjul etter litt tid (de fleste rekker å se meldingen)
+  setTimeout(() => {
+    if (!tip.hidden) {
+      tip.hidden = true;
+      localStorage.setItem(KEY, '1');
+    }
+  }, 12000);
+})();
     </script>
 </body>
 </html>

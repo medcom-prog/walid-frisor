@@ -827,3 +827,41 @@ img, video, iframe {
 
 /* Penere høyde til kalenderen (valgfritt) */
 #setmore-embed { min-height: clamp(720px, 100vh - 240px, 1200px); }
+/* Hint-boble for Setmore-personvern (mobil) */
+.consent-tip {
+  position: sticky;
+  top: calc(var(--header-height, 75px) + 8px);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .9rem;
+  background: #fff;
+  border: 1px solid var(--border-color, #E5E5E5);
+  border-radius: 999px;
+  box-shadow: var(--shadow, 0 4px 20px rgba(0,0,0,.1));
+}
+
+.consent-tip .tip-text { font-size: .92rem; color: var(--text-color, #333); }
+.consent-tip .tip-scroll,
+.consent-tip .tip-close {
+  background: transparent; border: 0; cursor: pointer; line-height: 1;
+}
+.consent-tip .tip-scroll { font-size: 1.2rem; animation: tip-bounce 1.2s infinite; }
+.consent-tip .tip-close { font-size: 1rem; opacity: .6; }
+.consent-tip .tip-close:hover { opacity: 1; }
+
+@keyframes tip-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* Vis kun på mobil */
+@media (min-width: 769px) {
+  .consent-tip { display: none !important; }
+}
+
+/* Sørg for at bunnen av iframen faktisk kan vises på mobil */
+@media (max-width: 768px) {
+  #setmore-embed { min-height: 1600px; } /* øk til 1800–1900px ved behov */
+}
