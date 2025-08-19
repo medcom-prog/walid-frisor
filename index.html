@@ -11,6 +11,38 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Minimal inline-stil for innbygd kalender -->
+    <style>
+      .booking-embed {
+        background: var(--bg-light, #F8F9FA);
+        border-radius: var(--border-radius, 12px);
+        box-shadow: var(--shadow, 0 4px 20px rgba(0,0,0,0.1));
+        padding: 24px;
+      }
+      .embed-wrap {
+        border: 1px solid var(--border-color, #E5E5E5);
+        border-radius: var(--border-radius, 12px);
+        overflow: hidden;
+        background: #fff;
+      }
+      #setmore-embed {
+        width: 100%;
+        min-height: 900px; /* øk om du vil vise mer av kalenderen */
+        border: 0;
+        display: block;
+      }
+      .embed-fallback {
+        display: none;
+        margin-top: 12px;
+      }
+      .btn-inline {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
@@ -38,6 +70,7 @@
                     <li><a href="#about" class="nav-link">Om oss</a></li>
                     <li><a href="#contact" class="nav-link">Kontakt</a></li>
                 </ul>
+                <!-- Scroll til bookingseksjonen -->
                 <a href="#book" class="btn btn-primary nav-cta">Book din time</a>
             </div>
             
@@ -66,6 +99,7 @@
                     </h1>
                     <p class="hero-description">Velg tidspunket som passer deg</p>
                     <div class="hero-buttons">
+                        <!-- Scroll til bookingseksjonen -->
                         <a href="#book" class="btn btn-primary btn-large">Book din time</a>
                         <a href="#services" class="btn btn-secondary btn-large">Se tjenester</a>
                     </div>
@@ -217,7 +251,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact / Booking Section -->
         <section class="contact" id="contact">
             <div class="container">
                 <div class="section-header">
@@ -256,40 +290,26 @@
                         </div>
                     </div>
                     
-                    <div class="contact-form" id="book">
+                    <!-- Bookingseksjon (INNEBYGD SETMORE) -->
+                    <div class="contact-form booking-embed" id="book">
                         <h3>Book din time</h3>
-                        <form class="booking-form">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" placeholder="Ditt navn" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" id="phone" name="phone" placeholder="Telefonnummer" required>
-                            </div>
-                            <div class="form-group">
-                                <select id="service" name="service" required>
-                                    <option value="">Velg klipp</option>
-                                    <option value="klassisk">Klassisk klipp - 350kr</option>
-                                    <option value="taper">Taper fade - 350kr</option>
-                                    <option value="skin">Skin fade - 350kr</option>
-                                    <option value="gradering">Gradering - 350kr</option>
-                                    <option value="skjegg">Skjegg trim - Fra 100kr</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                                                <label for="date" class="form-label">Ønsket dato</label>
+                        <p>Se ledige tider og book direkte i kalenderen under. Hvis rammen ikke vises, kan du åpne booking i ny fane.</p>
 
-                                <input type="date" id="date" name="date" placeholder="Ønsket dato">
-                            </div>
-                            <div class="form-group">
-                                                                <label for="time" class="form-label">Ønsket tid</label>
+                        <div class="embed-wrap">
+                          <iframe
+                            id="setmore-embed"
+                            src="https://walidfrisor.setmore.com/"
+                            title="Book time hos Walid Frisør"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            aria-label="Setmore booking"
+                          ></iframe>
+                        </div>
 
-                                <input type="time" id="time" name="time" placeholder="Ønsket tid">
-                            </div>
-                            <div class="form-group">
-                                <textarea id="message" name="message" placeholder="Melding (valgfritt)" rows="4"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-large">Send forespørsel</button>
-                        </form>
+                        <div id="embed-fallback" class="embed-fallback">
+                          <a class="btn btn-primary btn-large btn-inline" href="https://walidfrisor.setmore.com/" target="_blank" rel="noopener">Åpne booking i ny fane</a>
+                        </div>
+
                         <p class="form-note">Trenger du klipp etter kl. 17? Vi tar ofte drop-in til ca. 18–19 ved kapasitet. Ring oss for rask avklaring.</p>
                     </div>
                 </div>
@@ -309,6 +329,28 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
+
+    <!-- Failover: Vis knapp hvis iframen ikke kan lastes (X-Frame-Options / feil URL) -->
+    <script>
+      (function() {
+        var iframe = document.getElementById('setmore-embed');
+        var wrap = document.querySelector('.embed-wrap');
+        var fallback = document.getElementById('embed-fallback');
+        var loaded = false;
+
+        // Marker lastet når onload fyres
+        iframe.addEventListener('load', function() {
+          loaded = true;
+        });
+
+        // Etter 4s – hvis ikke lastet, vis fallback
+        setTimeout(function() {
+          if (!loaded) {
+            if (wrap) wrap.style.display = 'none';
+            if (fallback) fallback.style.display = 'block';
+          }
+        }, 4000);
+      })();
+    </script>
 </body>
 </html>
-
