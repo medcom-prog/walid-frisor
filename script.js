@@ -262,6 +262,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = formData.get('name');
             const phone = formData.get('phone');
             const service = formData.get('service');
+            const date = formData.get('date');
+            const time = formData.get('time');
             
             // Basic validation
             if (!name || !phone || !service) {
@@ -274,6 +276,44 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
                 showNotification('Vennligst oppgi et gyldig norsk telefonnummer.', 'error');
                 return;
+            }
+            
+            // Date validation (Norwegian format: dd.mm.yyyy)
+            if (date) {
+                const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+                if (!dateRegex.test(date)) {
+                    showNotification('Vennligst oppgi dato i format dd.mm.åååå (f.eks. 15.12.2025)', 'error');
+                    return;
+                }
+                
+                // Check if date is in the future
+                const dateParts = date.split('.');
+                const selectedDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (selectedDate < today) {
+                    showNotification('Vennligst velg en fremtidig dato.', 'error');
+                    return;
+                }
+            }
+            
+            // Time validation (format: hh:mm)
+            if (time) {
+                const timeRegex = /^\d{2}:\d{2}$/;
+                if (!timeRegex.test(time)) {
+                    showNotification('Vennligst oppgi tid i format tt:mm (f.eks. 14:30)', 'error');
+                    return;
+                }
+                
+                const timeParts = time.split(':');
+                const hours = parseInt(timeParts[0]);
+                const minutes = parseInt(timeParts[1]);
+                
+                if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+                    showNotification('Vennligst oppgi en gyldig tid (00:00 - 23:59)', 'error');
+                    return;
+                }
             }
             
             // Simulate form submission

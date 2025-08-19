@@ -256,6 +256,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    filter: brightness(0.);
 }
 
 .hero-overlay {
@@ -560,6 +561,14 @@ section {
     margin-bottom: 1rem;
 }
 
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -569,6 +578,7 @@ section {
     border-radius: var(--border-radius);
     font-family: inherit;
     transition: var(--transition);
+    font-size: 1rem;
 }
 
 .form-group input:focus,
@@ -576,6 +586,13 @@ section {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 
 .form-note {
