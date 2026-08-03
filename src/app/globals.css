@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Farger: jern, stål og messing – hentet fra barberkniven og stolen ---- */
+  --color-void: #0b0b0c;
+  --color-iron: #141517;
+  --color-iron-2: #1c1e22;
+  --color-steel: #2e3238;
+  --color-steel-2: #4a4f57;
+  --color-ash: #83878e;
+  --color-chrome: #d6dae0;
+  --color-paper: #fbfaf9;
+  --color-brass: #b08d57;
+  --color-brass-lit: #d8b87e;
+
+  /* ---- Typografi ---- */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* ---- Flytende skala ---- */
+  --text-mega: clamp(3rem, 1.1rem + 8.4vw, 9rem);
+  --text-h1: clamp(2.4rem, 1.4rem + 4.2vw, 5.25rem);
+  --text-h2: clamp(1.9rem, 1.35rem + 2.3vw, 3.4rem);
+  --text-h3: clamp(1.2rem, 1.05rem + 0.7vw, 1.65rem);
+  --text-lead: clamp(1.02rem, 0.96rem + 0.32vw, 1.2rem);
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-void);
+    color: var(--color-chrome);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-brass);
+    color: var(--color-void);
+  }
+
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--color-brass-lit);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Sperret småtekst som merker hver seksjon */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-ash);
+  }
+
+  .gutter {
+    padding-inline: clamp(1.15rem, 0.5rem + 2.6vw, 4.5rem);
+  }
+
+  /* Tynn kant som antyder struktur uten å bli en tung strek */
+  .hairline {
+    border-color: color-mix(in oklab, var(--color-chrome) 13%, transparent);
+  }
+}
+
+@layer utilities {
+  /* Gradvis avsløring ved scroll */
+  .avslor {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  .avslor[data-synlig] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.85s var(--ease-soft),
+      transform 0.85s var(--ease-soft);
+  }
+
+  /* Linjer som stiger opp i heroen ved innlasting */
+  .stig span {
+    display: block;
+    overflow: hidden;
+  }
+
+  .stig span > span {
+    display: block;
+    translate: 0 105%;
+    animation: stig-opp 1.05s var(--ease-soft) forwards;
+  }
+
+  @keyframes stig-opp {
+    to {
+      translate: 0 0;
+    }
+  }
+
+  /* Sakte panorering over stillbilder – gir liv uten video */
+  .panorer {
+    animation: panorer 28s var(--ease-soft) infinite alternate;
+  }
+
+  @keyframes panorer {
+    from {
+      scale: 1.04;
+      translate: 0 0;
+    }
+    to {
+      scale: 1.14;
+      translate: 0 -2%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .avslor {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stig span > span {
+    translate: 0 0;
+    animation: none;
+  }
+
+  .panorer {
+    animation: none;
+  }
+}
