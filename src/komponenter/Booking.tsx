@@ -43,7 +43,7 @@ export default function Booking() {
 
               <span className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
                 {apningstider.map((a) => (
-                  <span key={a.dag} className="font-mono text-xs text-steel-2">
+                  <span key={a.dag} className="font-mono text-xs text-ash">
                     {a.dag} <span className="text-ash">{a.tid}</span>
                   </span>
                 ))}
@@ -64,7 +64,7 @@ export default function Booking() {
         </a>
       </Avslor>
 
-      <Avslor as="p" className="mt-6 max-w-[70ch] text-sm text-steel-2">
+      <Avslor as="p" className="mt-6 max-w-[70ch] text-sm text-ash">
         {booking.notis}
       </Avslor>
     </section>

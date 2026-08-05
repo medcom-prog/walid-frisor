@@ -49,7 +49,7 @@ export default function Kontakt() {
                     {k.verdi}
                   </a>
                 </p>
-                {k.notis && <p className="mt-1 text-xs text-steel-2">{k.notis}</p>}
+                {k.notis && <p className="mt-1 text-xs text-ash">{k.notis}</p>}
               </div>
             </div>
           ))}

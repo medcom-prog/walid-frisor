@@ -18,7 +18,7 @@ const regler: Record<Felt, (v: string) => string | null> = {
 };
 
 const feltStil =
-  "w-full rounded-lg border hairline bg-void px-4 py-3.5 text-paper placeholder:text-steel-2 transition-colors focus:border-brass focus:outline-none";
+  "w-full rounded-lg border hairline bg-void px-4 py-3.5 text-paper placeholder:text-ash transition-colors focus:border-brass focus:outline-none";
 
 export default function Kontaktskjema() {
   const [feil, setFeil] = useState<Feil>({});

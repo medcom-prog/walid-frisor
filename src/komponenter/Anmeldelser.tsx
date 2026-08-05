@@ -32,7 +32,7 @@ export default function Anmeldelser() {
           </span>
           <span>
             <Stjerner />
-            <span className="mt-1.5 block font-mono text-[0.68rem] uppercase tracking-widest text-steel-2">
+            <span className="mt-1.5 block font-mono text-[0.68rem] uppercase tracking-widest text-ash">
               {anmeldelser.antall} anmeldelser
             </span>
           </span>
@@ -52,7 +52,7 @@ export default function Anmeldelser() {
                 </blockquote>
                 <figcaption className="mt-5 flex items-baseline justify-between gap-3 border-t hairline pt-4">
                   <span className="text-sm font-medium text-paper">{a.navn}</span>
-                  <span className="shrink-0 font-mono text-[0.66rem] uppercase tracking-widest text-steel-2">
+                  <span className="shrink-0 font-mono text-[0.66rem] uppercase tracking-widest text-ash">
                     {a.nar}
                   </span>
                 </figcaption>
@@ -62,7 +62,7 @@ export default function Anmeldelser() {
         ))}
       </ul>
 
-      <Avslor as="p" className="mt-10 text-sm text-steel-2">
+      <Avslor as="p" className="mt-10 text-sm text-ash">
         Vil du legge igjen en omtale?{" "}
         <a
           href={salong.booking}

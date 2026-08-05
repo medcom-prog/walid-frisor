@@ -73,7 +73,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="mt-14 text-center text-xs text-steel-2">
+      <p className="mt-14 text-center text-xs text-ash">
         {footer.kreditt}{" "}
         <a href="https://medcom.no" target="_blank" rel="noopener" className="underline transition-colors hover:text-ash">
           Medcom
@@ -82,13 +82,13 @@ export default function Footer() {
       </p>
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t hairline pt-6">
-        <p className="font-mono text-xs text-steel-2">
+        <p className="font-mono text-xs text-ash">
           © {new Date().getFullYear()} {footer.rettigheter}
         </p>
         <ul className="flex gap-5">
           {footer.juridisk.map((j) => (
             <li key={j}>
-              <span className="font-mono text-xs text-steel-2">{j}</span>
+              <span className="font-mono text-xs text-ash">{j}</span>
             </li>
           ))}
         </ul>
