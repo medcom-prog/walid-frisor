@@ -1,14 +1,23 @@
-import { salong, footer, apningstider, kartLenke } from "@/lib/innhold";
+import Image from "next/image";
+import { salong, footer, apningstiderKort, kartLenke } from "@/lib/innhold";
 
 export default function Footer() {
   return (
     <footer className="gutter border-t hairline pb-10 pt-16">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="flex items-center gap-2.5 font-display text-2xl text-paper">
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-brass" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12" />
-            </svg>
+          <p className="flex items-center gap-3 font-display text-2xl text-paper">
+            {/* Samme merke og lyse skive som i headeren – merket er svart
+                og trenger lys flate for å synes mot bakgrunnen. */}
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-paper p-[3px]">
+              <Image
+                src="/bilder/merke-192.webp"
+                alt=""
+                width={192}
+                height={192}
+                className="h-full w-full object-contain"
+              />
+            </span>
             Walid Frisør
           </p>
           <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ash">
@@ -42,7 +51,7 @@ export default function Footer() {
           </ul>
           <h2 className="kicker mb-4 mt-8">Åpningstider</h2>
           <ul className="flex flex-col gap-2.5 text-sm">
-            {apningstider.map((a) => (
+            {apningstiderKort.map((a) => (
               <li key={a.dag} className="flex items-baseline justify-between gap-4">
                 <span className="text-ash">{a.dag}</span>
                 <span className="font-mono text-paper tabular-nums">{a.tid}</span>
