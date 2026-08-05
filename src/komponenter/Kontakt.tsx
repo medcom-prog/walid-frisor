@@ -1,4 +1,4 @@
-import { kontakt, salong } from "@/lib/innhold";
+import { kontakt, salong, kartEmbed } from "@/lib/innhold";
 import Avslor from "./Avslor";
 import Kontaktskjema from "./Kontaktskjema";
 
@@ -57,7 +57,7 @@ export default function Kontakt() {
           <div className="mt-2 overflow-hidden rounded-xl border hairline">
             <iframe
               title={`Kart til ${salong.navn}`}
-              src={`https://www.google.com/maps?q=${encodeURIComponent(`${salong.gate}, ${salong.postnr} ${salong.by}`)}&output=embed`}
+              src={kartEmbed}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="block h-64 w-full border-0 grayscale"

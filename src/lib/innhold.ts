@@ -12,9 +12,20 @@ export const salong = {
   telefonE164: "+4745857400",
   epost: "walidfrisor12@gmail.com",
   booking: "https://walidfrisor.setmore.com/",
-  kart: "https://maps.google.com/?q=Olavsgate+3,+3256+Larvik",
   domene: "https://xn--walidfrisr-8cb.no",
 } as const;
+
+/**
+ * Kartsøket er bevisst skilt fra teksten som vises.
+ *
+ * Nettsiden skriver "Olavsgate 3" i ett ord, mens gata faktisk heter
+ * "Olavs gate" – slik den også står registrert i Setmore. Med ett ord
+ * finner ikke Google et entydig treff og viser flere adresser å velge
+ * mellom. Her brukes derfor riktig skrivemåte med land, som gir én pin.
+ */
+export const kartSok = "Olavs gate 3, 3256 Larvik, Norge";
+export const kartLenke = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(kartSok)}`;
+export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kartSok)}&output=embed`;
 
 export const meta = {
   tittel: "Walid Frisør – Klipp, fade & barbering i Larvik",
@@ -28,6 +39,7 @@ export const navigasjon = [
   { href: "#om-oss", tekst: "Om oss" },
   { href: "#tjenester", tekst: "Tjenester" },
   { href: "#priser", tekst: "Priser" },
+  { href: "#anmeldelser", tekst: "Omtaler" },
   { href: "#kontakt", tekst: "Kontakt" },
 ] as const;
 
@@ -179,7 +191,7 @@ export const kontakt = {
     {
       tittel: "Besøk oss",
       verdi: `${salong.gate}, ${salong.postnr} ${salong.by}`,
-      href: salong.kart,
+      href: kartLenke,
       notis: "Sentralt i Larvik",
       ekstern: true,
     },
@@ -194,6 +206,29 @@ export const kontakt = {
     meldingPlassholder: "Når passer det, og hva ønsker du?",
     send: "Send melding",
   },
+} as const;
+
+export type Anmeldelse = { navn: string; nar: string; tekst: string };
+
+/** Ekte omtaler fra bookingsiden på Setmore. 5,0 av 5 på 10 vurderinger. */
+export const anmeldelser = {
+  merkelapp: "Anmeldelser",
+  tittel: "Det kundene sier",
+  beskrivelse: "Hentet fra bookingsiden vår. Ingen av dem er redigert.",
+  snitt: "5,0",
+  antall: 10,
+  liste: [
+    { navn: "Asbjørn Johannessen", nar: "I forgårs", tekst: "Meget effektiv, dyktig, nøyaktig og trivelig!!!! anbefales" },
+    { navn: "Patrick Strand Larsen", nar: "Forrige måned", tekst: "Dette er den beste klippen jeg noensinne har hatt. Alan er utrolig hyggelig og flink til å stille spørsmål. Anbefaler ham på det sterkeste 👌" },
+    { navn: "Zelim", nar: "Forrige måned", tekst: "5 stjerner fordi han liker Minecraft 👍 og gjør meg vakker" },
+    { navn: "Jeanette Jensen", nar: "For 3 måneder siden", tekst: "Super service når jeg hadde rota med bestillingen! Rett og slett drit bra ifølge sønnen min som klipte seg. Han kommer garantert igjen! 👍" },
+    { navn: "Sander Hobæk Larsen", nar: "For 3 måneder siden", tekst: "Hyggelig og syke skills, ble akkurat sånn jeg ville ha det. Anbefales 💯" },
+    { navn: "Javier LLorens", nar: "For 4 måneder siden", tekst: "Veldig profesjonell service, rimelige priser og svært god kundebehandling. Jeg ser alltid yngre ut når jeg går derfra 😉 Anbefales!" },
+    { navn: "Esben Gisle", nar: "For 4 måneder siden", tekst: "Rask og hyggelig, til en rimelig pris" },
+    { navn: "Mohammad", nar: "For 5 måneder siden", tekst: "Den beste i hele Vestfold og Norge" },
+    { navn: "Hassan Ayoub", nar: "For 5 måneder siden", tekst: "Numero uno" },
+    { navn: "Samir Moutacim", nar: "For 6 måneder siden", tekst: "Beste faden i byen! Anbefales på det sterkeste 🤝" },
+  ] as Anmeldelse[],
 } as const;
 
 export const apningstider = [

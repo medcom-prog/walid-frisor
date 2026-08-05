@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
-import { salong, meta, priser } from "@/lib/innhold";
+import { salong, meta, priser, kartLenke } from "@/lib/innhold";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -80,7 +80,7 @@ function StrukturerteData() {
       addressRegion: "Vestfold",
       addressCountry: "NO",
     },
-    hasMap: salong.kart,
+    hasMap: kartLenke,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

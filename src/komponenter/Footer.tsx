@@ -1,4 +1,4 @@
-import { salong, footer, apningstider } from "@/lib/innhold";
+import { salong, footer, apningstider, kartLenke } from "@/lib/innhold";
 
 export default function Footer() {
   return (
@@ -65,7 +65,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href={salong.kart} target="_blank" rel="noopener" className="text-ash transition-colors hover:text-paper">
+              <a href={kartLenke} target="_blank" rel="noopener" className="text-ash transition-colors hover:text-paper">
                 {salong.gate}, {salong.postnr} {salong.by}
               </a>
             </li>

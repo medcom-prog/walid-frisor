@@ -120,21 +120,6 @@
     }
   }
 
-  /* Sakte panorering over stillbilder – gir liv uten video */
-  .panorer {
-    animation: panorer 28s var(--ease-soft) infinite alternate;
-  }
-
-  @keyframes panorer {
-    from {
-      scale: 1.04;
-      translate: 0 0;
-    }
-    to {
-      scale: 1.14;
-      translate: 0 -2%;
-    }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,7 +145,4 @@
     animation: none;
   }
 
-  .panorer {
-    animation: none;
-  }
 }

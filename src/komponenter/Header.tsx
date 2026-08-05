@@ -67,13 +67,13 @@ export default function Header() {
               flate for å synes. Fargene i logoen er urørt – den ligger bare på
               en hvit skive. Originalfila hadde mye tomrom, som er trimmet bort
               så merket kan vises stort uten å bli uskarpt. */}
-          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-paper ring-1 ring-white/15 sm:h-16 sm:w-16">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-paper p-[3px] sm:h-14 sm:w-14">
             <Image
               src="/bilder/merke-192.webp"
               alt=""
               width={192}
               height={192}
-              className="h-11 w-11 sm:h-[3.25rem] sm:w-[3.25rem]"
+              className="h-full w-full object-contain"
               priority
             />
           </span>
