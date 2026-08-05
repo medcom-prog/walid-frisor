@@ -6,7 +6,8 @@
 export const salong = {
   navn: "Walid Frisør",
   by: "Larvik",
-  gate: "Olavsgate 3",
+  /** Gata heter "Olavs gate" i to ord, slik den også står i Setmore. */
+  gate: "Olavs gate 3",
   postnr: "3256",
   telefon: "+47 45 85 74 00",
   telefonE164: "+4745857400",
@@ -16,14 +17,10 @@ export const salong = {
 } as const;
 
 /**
- * Kartsøket er bevisst skilt fra teksten som vises.
- *
- * Nettsiden skriver "Olavsgate 3" i ett ord, mens gata faktisk heter
- * "Olavs gate" – slik den også står registrert i Setmore. Med ett ord
- * finner ikke Google et entydig treff og viser flere adresser å velge
- * mellom. Her brukes derfor riktig skrivemåte med land, som gir én pin.
+ * Kartsøket tar med land i tillegg til adressen. Uten det finner ikke
+ * Google et entydig treff, og viser flere adresser å velge mellom.
  */
-export const kartSok = "Olavs gate 3, 3256 Larvik, Norge";
+export const kartSok = `${salong.gate}, ${salong.postnr} ${salong.by}, Norge`;
 export const kartLenke = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(kartSok)}`;
 export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kartSok)}&output=embed`;
 
