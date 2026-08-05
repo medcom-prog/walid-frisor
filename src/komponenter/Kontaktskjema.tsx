@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { kontakt, salong } from "@/lib/innhold";
+import { kontakt, salong, formspreeEndepunkt } from "@/lib/innhold";
 
 type Felt = "navn" | "epost" | "telefon" | "melding";
 type Feil = Partial<Record<Felt, string>>;
@@ -25,6 +25,40 @@ export default function Kontaktskjema() {
   const [status, setStatus] = useState<"klar" | "sender" | "sendt" | "feilet">("klar");
   const s = kontakt.skjema;
 
+  /**
+   * Er ikke Formspree satt opp ennå, sier vi det rett ut i stedet for å
+   * vise et skjema som later som det virker. Et skjema som svelger
+   * meldinger er verre enn ikke noe skjema.
+   */
+  if (!formspreeEndepunkt) {
+    return (
+      <div className="flex flex-col gap-5 rounded-xl border border-brass/30 bg-iron/50 p-6 sm:p-8">
+        <div>
+          <h3 className="font-display text-h3 text-paper">{s.tittel}</h3>
+          <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-ash">{s.ingress}</p>
+        </div>
+        <p className="rounded-lg border hairline bg-void p-4 text-sm leading-relaxed text-ash">
+          Skjemaet er ikke koblet opp ennå. Ta kontakt direkte i mellomtiden – vi svarer
+          like fort.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={`mailto:${salong.epost}`}
+            className="rounded-full bg-paper px-6 py-3.5 font-medium text-void transition-colors hover:bg-brass-lit"
+          >
+            Send e-post
+          </a>
+          <a
+            href={`tel:${salong.telefonE164}`}
+            className="rounded-full border hairline px-6 py-3.5 font-mono text-sm text-paper transition-colors hover:border-brass hover:text-brass-lit"
+          >
+            {salong.telefon}
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   async function send(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const skjema = e.currentTarget;
@@ -45,15 +79,26 @@ export default function Kontaktskjema() {
 
     setStatus("sender");
     try {
-      const svar = await fetch("/api/kontakt", {
+      const svar = await fetch(formspreeEndepunkt, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...data,
+          // Formspree bruker dette som emnefelt og svaradresse
+          _subject: `Ny henvendelse fra ${data.navn} – walidfrisør.no`,
+          email: data.epost,
+        }),
       });
-      if (!svar.ok) throw new Error(String(svar.status));
+
+      if (!svar.ok) {
+        const info = await svar.json().catch(() => null);
+        throw new Error(info?.errors?.[0]?.message ?? `Formspree svarte ${svar.status}`);
+      }
+
       skjema.reset();
       setStatus("sendt");
-    } catch {
+    } catch (err) {
+      console.error("Kontaktskjema:", err);
       setStatus("feilet");
     }
   }
@@ -141,10 +186,10 @@ export default function Kontaktskjema() {
         </p>
       </div>
 
-      {/* Honningkrukke mot bot-spam */}
+      {/* _gotcha er Formspree sin egen honningkrukke – fylt ut = boten filtreres bort */}
       <div aria-hidden="true" className="sr-only">
-        <label htmlFor="firmanavn">La dette stå tomt</label>
-        <input id="firmanavn" name="firmanavn" tabIndex={-1} autoComplete="off" />
+        <label htmlFor="_gotcha">La dette stå tomt</label>
+        <input id="_gotcha" name="_gotcha" tabIndex={-1} autoComplete="off" />
       </div>
 
       <div className="flex flex-wrap items-center gap-4 sm:col-span-2">

@@ -13,19 +13,26 @@ Nettsted for Walid Frisør, barbershop i Olavs gate 3, Larvik.
 
 ```bash
 npm install
-cp .env.example .env.local   # fyll inn RESEND_API_KEY
 npm run dev
 ```
 
-## Miljøvariabler
+Prosjektet trenger **ingen miljøvariabler**.
 
-| Variabel | Påkrevd | Beskrivelse |
-|---|---|---|
-| `RESEND_API_KEY` | Ja | API-nøkkel fra Resend. Uten den svarer kontaktskjemaet 500. |
-| `KONTAKT_TIL` | Nei | Mottaker for skjemaet. Standard: `walidfrisor12@gmail.com` |
-| `KONTAKT_FRA` | Nei | Avsender. Må ligge på et domene som er verifisert i Resend. |
+## Kontaktskjema
 
-Settes i Vercel under **Settings → Environment Variables**.
+Skjemaet sendes til **Formspree**. Endepunktet ligger som `formspreeEndepunkt`
+i [`src/lib/innhold.ts`](src/lib/innhold.ts).
+
+Det er offentlig av design — det står i klientkoden uansett og gir ingen
+tilgang til noe. Derfor ligger det i koden og ikke som en miljøvariabel:
+da kan det ikke bli glemt i Vercel og gjøre skjemaet dødt ubemerket.
+
+Står feltet tomt, viser siden e-post og telefon i stedet for et skjema som
+later som det virker.
+
+Feltnavnene som sendes: `navn`, `epost`, `telefon`, `melding`. I tillegg
+`_subject` for emnefeltet og `_gotcha` som Formspree sin egen honningkrukke
+mot bot-spam.
 
 ## Innhold
 
@@ -33,17 +40,27 @@ Alt redaksjonelt innhold ligger i [`src/lib/innhold.ts`](src/lib/innhold.ts) —
 tjenester, priser, åpningstider, kontaktinfo og anmeldelser. Tekst kan endres
 der uten å røre komponentene.
 
-Åpningstidene er hentet fra Setmore 3. august 2026 og bør bekreftes mot
-faktiske tider før de står lenge.
+Åpningstidene er salongens faktiske tider, oppgitt av Walid. De er ikke de
+samme som tidene i Setmore, som kun styrer hvilke tider som kan bookes på nett.
+
+## Personvern
+
+Siden setter ingen informasjonskapsler og lagrer ingenting i nettleseren.
+Google-kartet lastes først når besøkende trykker på det, så ingen data går
+til tredjepart uten at brukeren ber om det. Endres dette — for eksempel ved
+å legge til besøksstatistikk — må `/informasjonskapsler` oppdateres, og da
+trengs sannsynligvis en ekte samtykkeløsning.
 
 ## Struktur
 
 ```
 src/
 ├── app/
-│   ├── api/kontakt/route.ts   Tar imot skjemaet, sender via Resend
 │   ├── layout.tsx             Fonter, metadata, schema.org
 │   ├── page.tsx               Setter sammen seksjonene
+│   ├── personvern/            Juridiske sider
+│   ├── vilkar/
+│   ├── informasjonskapsler/
 │   ├── manifest.ts            PWA-manifest
 │   ├── robots.ts / sitemap.ts
 │   └── globals.css            Designtokens og hjelpeklasser

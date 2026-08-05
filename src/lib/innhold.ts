@@ -29,6 +29,19 @@ export const kartSok = `${googleBedrift}, ${salong.gate}, ${salong.postnr} ${sal
 export const kartLenke = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(kartSok)}`;
 export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kartSok)}&output=embed`;
 
+/**
+ * Kontaktskjemaet sendes til Formspree.
+ *
+ * Endepunktet er offentlig av design – det ligger i klientkoden uansett,
+ * og gir ingen tilgang til noe. Derfor står det her og ikke som en
+ * miljøvariabel: da kan det ikke bli glemt i Vercel og gjøre skjemaet
+ * dødt uten at noen merker det.
+ *
+ * Hent det i Formspree under Forms → det aktuelle skjemaet → Integration.
+ * Formatet er https://formspree.io/f/xxxxxxxx
+ */
+export const formspreeEndepunkt = "";
+
 export const meta = {
   tittel: "Walid Frisør – Klipp, fade & barbering i Larvik",
   beskrivelse:
