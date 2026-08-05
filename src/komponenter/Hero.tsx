@@ -16,18 +16,20 @@ export default function Hero() {
           sizes="100vw"
           className="panorer object-cover object-[50%_28%] grayscale"
         />
-        {/* To lag: ett som løfter bunnen, ett som demper toppen bak headeren */}
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/70 to-void/25" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-void/80 to-transparent" />
+        {/* Tre lag: bunnen bæres av teksten, toppen dempes bak headeren,
+            og et venstrelag sikrer kontrast under overskriften uansett motiv */}
+        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/75 to-void/30" />
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-void/85 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-void/75 via-void/25 to-transparent lg:w-3/4" />
       </div>
 
       <div className="gutter pb-14 pt-32 sm:pb-20">
         <p
-          className="kicker mb-7 flex items-center gap-3"
+          className="kicker mb-7 flex items-center gap-3 text-chrome"
           style={{ animation: "stig-opp .8s cubic-bezier(.22,.61,.36,1) .1s both" }}
         >
           <span className="h-px w-8 bg-brass" aria-hidden="true" />
-          Barbershop siden 2019
+          Barbershop · {salong.gate}, {salong.by}
         </p>
 
         <h1 className="stig max-w-[16ch] text-mega font-medium text-paper">
