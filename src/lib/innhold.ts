@@ -40,7 +40,7 @@ export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kar
  * Hent det i Formspree under Forms → det aktuelle skjemaet → Integration.
  * Formatet er https://formspree.io/f/xxxxxxxx
  */
-export const formspreeEndepunkt = "";
+export const formspreeEndepunkt = "https://formspree.io/f/mjkoqgvn";
 
 export const meta = {
   tittel: "Walid Frisør – Klipp, fade & barbering i Larvik",
