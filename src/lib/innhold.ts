@@ -270,5 +270,9 @@ export const footer = {
   ],
   kreditt: "Denne nettsiden er utviklet i samarbeid med",
   rettigheter: "Walid Frisør. Alle rettigheter reservert.",
-  juridisk: ["Personvern", "Vilkår", "Cookies"],
+  juridisk: [
+    { tekst: "Personvern", href: "/personvern" },
+    { tekst: "Vilkår", href: "/vilkar" },
+    { tekst: "Informasjonskapsler", href: "/informasjonskapsler" },
+  ],
 } as const;

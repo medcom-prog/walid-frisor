@@ -96,8 +96,10 @@ export default function Footer() {
         </p>
         <ul className="flex gap-5">
           {footer.juridisk.map((j) => (
-            <li key={j}>
-              <span className="font-mono text-xs text-ash">{j}</span>
+            <li key={j.href}>
+              <a href={j.href} className="font-mono text-xs text-ash underline underline-offset-4 transition-colors hover:text-paper">
+                {j.tekst}
+              </a>
             </li>
           ))}
         </ul>
