@@ -11,7 +11,7 @@ export default function Priser() {
           {priser.merkelapp}
         </p>
         <h2 className="text-h2 text-paper">{priser.tittel}</h2>
-        <p className="mt-5 text-lead text-ash">{priser.beskrivelse}</p>
+        {priser.beskrivelse && <p className="mt-5 text-lead text-ash">{priser.beskrivelse}</p>}
       </Avslor>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

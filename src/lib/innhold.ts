@@ -118,7 +118,7 @@ export const tjenester = {
 export const priser = {
   merkelapp: "Priser",
   tittel: "Rettferdige priser – tydelig oppsett",
-  beskrivelse: "Eksempler – oppdater med dine faktiske priser og bilder.",
+  beskrivelse: "",
   kort: [
     {
       navn: "Klassisk klipp",
