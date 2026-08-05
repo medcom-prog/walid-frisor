@@ -93,13 +93,20 @@ export default function Hero() {
             </a>
           </div>
 
-          <dl className="mt-12 grid grid-cols-3 gap-x-6 border-t hairline pt-8 sm:gap-x-10">
+          {/* På smal skjerm ligger tallene som rader. Merkelappene er versaler
+              med sperring, og "Kundetilfredshet" er for bred til en tredjedels
+              kolonne på 375 px – da kolliderer den med naboen. Fra sm er det
+              plass til tre kolonner. */}
+          <dl className="mt-12 border-t hairline pt-6 sm:grid sm:grid-cols-3 sm:gap-x-10 sm:pt-8">
             {hero.tall.map((t) => (
-              <div key={t.merke}>
+              <div
+                key={t.merke}
+                className="flex items-baseline justify-between gap-4 border-b hairline py-3 last:border-b-0 sm:block sm:border-b-0 sm:py-0"
+              >
                 <dt className="font-display text-3xl text-paper sm:text-4xl">
                   <Telleverk til={t.til} suffiks={t.suffiks} desimaler={t.desimaler} />
                 </dt>
-                <dd className="kicker mt-2">{t.merke}</dd>
+                <dd className="kicker text-right sm:mt-2 sm:text-left">{t.merke}</dd>
               </div>
             ))}
           </dl>
