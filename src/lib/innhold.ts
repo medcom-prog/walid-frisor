@@ -17,10 +17,15 @@ export const salong = {
 } as const;
 
 /**
- * Kartsøket tar med land i tillegg til adressen. Uten det finner ikke
- * Google et entydig treff, og viser flere adresser å velge mellom.
+ * Kartet søker på bedriftsnavnet slik det står registrert i Google
+ * Business Profile, ikke bare på adressen. Da åpner kartet selve
+ * profilen – med bilde, vurdering, åpningstider og veibeskrivelse –
+ * i stedet for en anonym pin på et gatenummer.
+ *
+ * Adressen tas med i søket for å gjøre treffet entydig.
  */
-export const kartSok = `${salong.gate}, ${salong.postnr} ${salong.by}, Norge`;
+export const googleBedrift = "Walid Frisør avd. Alan";
+export const kartSok = `${googleBedrift}, ${salong.gate}, ${salong.postnr} ${salong.by}`;
 export const kartLenke = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(kartSok)}`;
 export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kartSok)}&output=embed`;
 
@@ -194,13 +199,16 @@ export const kontakt = {
     },
   ],
   skjema: {
+    /** Vanlig klipp bookes i kalenderen. Skjemaet er for alt annet. */
+    tittel: "Noe utenom vanlig time?",
+    ingress:
+      "Skal du bare klippe deg, book time direkte – det går raskest. Skjemaet her er for det som ikke passer inn i kalenderen: klipp til bryllup eller konfirmasjon, større selskap, avtaler for bedrifter eller andre samarbeid.",
     navn: "Navn *",
     epost: "E-post *",
     telefon: "Telefon",
-    tjeneste: "Tjeneste",
-    tjenesteValg: ["Velg tjeneste", "Herreklipp", "Skin fade", "Skjegg & barbering", "Annet"],
     melding: "Melding *",
-    meldingPlassholder: "Når passer det, og hva ønsker du?",
+    meldingPlassholder:
+      "Fortell kort hva det gjelder – anledning, hvor mange dere er, og omtrent når.",
     send: "Send melding",
   },
 } as const;

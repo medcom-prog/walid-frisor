@@ -17,7 +17,6 @@ const MAKS = {
   navn: 100,
   epost: 150,
   telefon: 40,
-  tjeneste: 60,
   melding: 4000,
 } as const;
 
@@ -68,7 +67,6 @@ export async function POST(request: Request) {
     ["Navn", felt.navn],
     ["E-post", felt.epost],
     ["Telefon", felt.telefon || "—"],
-    ["Tjeneste", felt.tjeneste || "—"],
   ];
 
   const html = `
@@ -110,7 +108,7 @@ export async function POST(request: Request) {
         from: FRA,
         to: [TIL],
         reply_to: felt.epost,
-        subject: `Ny henvendelse fra ${felt.navn}${felt.tjeneste ? ` – ${felt.tjeneste}` : ""}`,
+        subject: `Ny henvendelse fra ${felt.navn}`,
         html,
         text: tekst,
       }),

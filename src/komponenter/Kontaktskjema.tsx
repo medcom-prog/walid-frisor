@@ -86,6 +86,23 @@ export default function Kontaktskjema() {
       noValidate
       className="grid gap-5 rounded-xl border hairline bg-iron/50 p-6 sm:grid-cols-2 sm:p-8"
     >
+      <div className="sm:col-span-2">
+        <h3 className="font-display text-h3 text-paper">{s.tittel}</h3>
+        <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-ash">{s.ingress}</p>
+        <a
+          href={salong.booking}
+          target="_blank"
+          rel="noopener"
+          className="mt-4 inline-flex items-center gap-2 text-sm text-brass underline underline-offset-4 transition-colors hover:text-brass-lit"
+        >
+          Book vanlig time i stedet
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M14 4h6v6M20 4l-9 9" />
+          </svg>
+        </a>
+        <hr className="mt-7 border-0 border-t hairline" />
+      </div>
+
       {tekstfelt.map((f) => (
         <div key={f.navn}>
           <label htmlFor={f.navn} className="mb-2 block text-sm text-ash">
@@ -105,20 +122,6 @@ export default function Kontaktskjema() {
           </p>
         </div>
       ))}
-
-      <div>
-        <label htmlFor="tjeneste" className="mb-2 block text-sm text-ash">
-          {s.tjeneste}
-        </label>
-        <select id="tjeneste" name="tjeneste" className={feltStil} defaultValue="">
-          {s.tjenesteValg.map((v, i) => (
-            <option key={v} value={i === 0 ? "" : v}>
-              {v}
-            </option>
-          ))}
-        </select>
-        <p className="mt-1.5 min-h-[1rem]" />
-      </div>
 
       <div className="sm:col-span-2">
         <label htmlFor="melding" className="mb-2 block text-sm text-ash">
