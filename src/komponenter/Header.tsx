@@ -13,33 +13,27 @@ export default function Header() {
 
   useEffect(() => {
     let venter = false;
-
     const oppdater = () => {
       const y = window.scrollY;
       setScrollet(y > 12);
-      // Skjul headeren når man scroller nedover, men aldri med menyen åpen
       setSkjult(!apen && y > 240 && y > forrige.current + 4);
       forrige.current = y;
       venter = false;
     };
-
     const onScroll = () => {
       if (venter) return;
       venter = true;
       requestAnimationFrame(oppdater);
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     oppdater();
     return () => window.removeEventListener("scroll", onScroll);
   }, [apen]);
 
-  // Lås bakgrunnen og lytt på Escape mens menyen er åpen
   useEffect(() => {
     if (!apen) return;
     const forrigeOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setApen(false);
@@ -47,7 +41,6 @@ export default function Header() {
       }
     };
     document.addEventListener("keydown", onKey);
-
     return () => {
       document.body.style.overflow = forrigeOverflow;
       document.removeEventListener("keydown", onKey);
@@ -61,13 +54,11 @@ export default function Header() {
       }`}
     >
       <div
-        className={`gutter flex h-20 items-center justify-between border-b transition-colors duration-500 ${
-          scrollet
-            ? "hairline bg-void/85 backdrop-blur-xl"
-            : "border-transparent bg-transparent"
+        className={`gutter flex h-20 items-center justify-between gap-6 border-b transition-colors duration-500 ${
+          scrollet ? "hairline bg-void/85 backdrop-blur-xl" : "border-transparent bg-transparent"
         }`}
       >
-        <a href="#topp" className="flex items-center gap-3" aria-label={`${salong.navn} – til toppen`}>
+        <a href="#hjem" className="flex items-center gap-3" aria-label={`${salong.navn} – til toppen`}>
           <Image
             src="/bilder/logo-132.webp"
             alt=""
@@ -81,7 +72,7 @@ export default function Header() {
           </span>
         </a>
 
-        <nav aria-label="Hovedmeny" className="hidden items-center gap-9 md:flex">
+        <nav aria-label="Hovedmeny" className="hidden items-center gap-7 lg:flex">
           {navigasjon.map((l) => (
             <a
               key={l.href}
@@ -96,21 +87,18 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <a
-            href={salong.booking}
-            target="_blank"
-            rel="noopener"
+            href="#book"
             className="hidden rounded-full bg-paper px-5 py-2.5 text-sm font-medium text-void transition-colors hover:bg-brass-lit sm:inline-flex"
           >
-            Book time
+            Book time her
           </a>
-
           <button
             ref={toggleRef}
             type="button"
             onClick={() => setApen((v) => !v)}
             aria-expanded={apen}
             aria-controls="mobilmeny"
-            className="grid h-11 w-11 place-items-center text-paper md:hidden"
+            className="grid h-11 w-11 place-items-center text-paper lg:hidden"
           >
             <span className="sr-only">{apen ? "Lukk meny" : "Åpne meny"}</span>
             <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
@@ -120,31 +108,28 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobilmeny */}
       <div
         id="mobilmeny"
         hidden={!apen}
-        className="gutter h-[calc(100dvh-5rem)] border-b hairline bg-void/98 backdrop-blur-xl md:hidden"
+        className="gutter h-[calc(100dvh-5rem)] overflow-y-auto border-b hairline bg-void/98 backdrop-blur-xl lg:hidden"
       >
-        <nav aria-label="Meny" className="flex flex-col pt-6">
-          {navigasjon.map((l, i) => (
+        <nav aria-label="Meny" className="flex flex-col pt-4 pb-10">
+          {navigasjon.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setApen(false)}
-              className="border-b hairline py-5 font-display text-3xl text-paper"
-              style={{ animation: `stig-opp .5s cubic-bezier(.22,.61,.36,1) ${i * 60}ms both` }}
+              className="border-b hairline py-5 font-display text-2xl text-paper"
             >
               {l.tekst}
             </a>
           ))}
           <a
-            href={salong.booking}
-            target="_blank"
-            rel="noopener"
+            href="#book"
+            onClick={() => setApen(false)}
             className="mt-8 rounded-full bg-paper py-4 text-center font-medium text-void"
           >
-            Book time
+            Book time her
           </a>
           <a href={`tel:${salong.telefonE164}`} className="mt-3 py-3 text-center font-mono text-sm text-ash">
             {salong.telefon}

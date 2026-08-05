@@ -1,12 +1,52 @@
-import Image from "next/image";
-import { salong } from "@/lib/innhold";
+"use client";
 
-const linjer = ["Skarpe linjer.", "Rolig stol.", "Larvik."];
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { hero } from "@/lib/innhold";
+
+/** Teller opp til måltallet når heroen er i bildet. Viser sluttverdien uten JS. */
+function Telleverk({ til, suffiks, desimaler }: { til: number; suffiks: string; desimaler: number }) {
+  const [verdi, setVerdi] = useState(til);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!("IntersectionObserver" in window)) return;
+
+    const io = new IntersectionObserver(
+      ([oppf]) => {
+        if (!oppf.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const varighet = 1400;
+        const steg = (na: number) => {
+          const p = Math.min((na - start) / varighet, 1);
+          const lettet = 1 - Math.pow(1 - p, 3);
+          setVerdi(til * lettet);
+          if (p < 1) requestAnimationFrame(steg);
+          else setVerdi(til);
+        };
+        requestAnimationFrame(steg);
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [til]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {verdi.toFixed(desimaler).replace(".", ",")}
+      {verdi >= til ? suffiks : ""}
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
-    <section id="topp" className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden">
-      {/* Bakgrunnsbilde med sakte panorering */}
+    <section id="hjem" className="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <Image
           src="/bilder/hero-portrait-1200.webp"
@@ -16,73 +56,58 @@ export default function Hero() {
           sizes="100vw"
           className="panorer object-cover object-[50%_28%] grayscale"
         />
-        {/* Tre lag: bunnen bæres av teksten, toppen dempes bak headeren,
-            og et venstrelag sikrer kontrast under overskriften uansett motiv */}
         <div className="absolute inset-0 bg-gradient-to-t from-void via-void/75 to-void/30" />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-void/85 to-transparent" />
-        <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-void/75 via-void/25 to-transparent lg:w-3/4" />
+        <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-void/80 via-void/30 to-transparent lg:w-3/4" />
       </div>
 
       <div className="gutter pb-14 pt-32 sm:pb-20">
-        <p
-          className="kicker mb-7 flex items-center gap-3 text-chrome"
-          style={{ animation: "stig-opp .8s cubic-bezier(.22,.61,.36,1) .1s both" }}
-        >
-          <span className="h-px w-8 bg-brass" aria-hidden="true" />
-          Barbershop · {salong.gate}, {salong.by}
-        </p>
-
-        <h1 className="stig max-w-[16ch] text-mega font-medium text-paper">
-          {linjer.map((linje, i) => (
-            <span key={linje}>
-              <span style={{ animationDelay: `${0.15 + i * 0.11}s` }}>
-                {i === 2 ? <em className="not-italic text-brass">{linje}</em> : linje}
-              </span>
+        <h1 className="stig max-w-[18ch] text-h1 font-medium text-paper">
+          <span>
+            <span style={{ animationDelay: ".12s" }}>{hero.tittel}</span>
+          </span>
+          <span>
+            <span className="font-light text-brass" style={{ animationDelay: ".24s" }}>
+              {hero.undertittel}
             </span>
-          ))}
+          </span>
         </h1>
 
-        <div
-          className="mt-10 flex flex-col gap-8 border-t hairline pt-8 sm:flex-row sm:items-end sm:justify-between"
-          style={{ animation: "stig-opp .9s cubic-bezier(.22,.61,.36,1) .55s both" }}
+        <p
+          className="mt-7 max-w-[58ch] text-lead text-chrome"
+          style={{ animation: "stig-opp .9s cubic-bezier(.22,.61,.36,1) .42s both" }}
         >
-          <p className="max-w-[46ch] text-lead text-ash">
-            Fades, klassisk klipp og skjeggforming hos {salong.barberer} i {salong.gate}.
-            Book på nett, eller stikk innom — vi tar drop-in når stolen er ledig.
-          </p>
+          {hero.beskrivelse}
+        </p>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <a
-              href={salong.booking}
-              target="_blank"
-              rel="noopener"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-paper px-7 py-4 font-medium text-void transition-colors hover:bg-brass-lit"
-            >
-              Book time
-              <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                <path d="M5 12h14m-6-6 6 6-6 6" />
-              </svg>
-            </a>
-            <a
-              href={`tel:${salong.telefonE164}`}
-              className="inline-flex items-center gap-2.5 rounded-full border hairline px-7 py-4 font-mono text-sm text-paper transition-colors hover:border-brass hover:text-brass-lit"
-            >
-              {salong.telefon}
-            </a>
-          </div>
+        <div
+          className="mt-9 flex flex-wrap gap-3"
+          style={{ animation: "stig-opp .9s cubic-bezier(.22,.61,.36,1) .54s both" }}
+        >
+          <a
+            href="#book"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-paper px-7 py-4 font-medium text-void transition-colors hover:bg-brass-lit"
+          >
+            {hero.knapper.book}
+            <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" />
+            </svg>
+          </a>
+          <a
+            href="#priser"
+            className="inline-flex items-center rounded-full border hairline px-7 py-4 font-medium text-paper transition-colors hover:border-brass hover:text-brass-lit"
+          >
+            {hero.knapper.priser}
+          </a>
         </div>
 
-        {/* Sosialt bevis rett under folden – ekte tall fra Setmore */}
-        <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 border-t hairline pt-8 sm:grid-cols-4">
-          {[
-            { t: "5,0", e: "av 5 i snitt" },
-            { t: "10", e: "omtaler" },
-            { t: "30", e: "minutter per time" },
-            { t: "350", e: "kroner for klipp" },
-          ].map((s) => (
-            <div key={s.e}>
-              <dt className="font-display text-4xl text-paper tabular-nums">{s.t}</dt>
-              <dd className="kicker mt-2">{s.e}</dd>
+        <dl className="mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t hairline pt-8 sm:grid-cols-3 sm:gap-x-12">
+          {hero.tall.map((t) => (
+            <div key={t.merke}>
+              <dt className="font-display text-4xl text-paper">
+                <Telleverk til={t.til} suffiks={t.suffiks} desimaler={t.desimaler} />
+              </dt>
+              <dd className="kicker mt-2">{t.merke}</dd>
             </div>
           ))}
         </dl>

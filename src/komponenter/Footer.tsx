@@ -1,43 +1,47 @@
-import { salong, navigasjon, apningstider } from "@/lib/innhold";
+import { salong, footer, apningstider } from "@/lib/innhold";
 
 export default function Footer() {
   return (
-    <footer className="gutter border-t hairline pb-10 pt-20">
-      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="lg:col-span-2">
-          <p className="font-display text-3xl text-paper">
-            Walid<span className="text-brass"> Frisør</span>
+    <footer className="gutter border-t hairline pb-10 pt-16">
+      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <p className="flex items-center gap-2.5 font-display text-2xl text-paper">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-brass" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12" />
+            </svg>
+            Walid Frisør
           </p>
-          <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-ash">
-            Barbershop i {salong.gate}, {salong.by}. Fades, klassisk klipp og skjegg —
-            med eller uten avtale.
+          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ash">
+            {footer.beskrivelse}
           </p>
-          <a
-            href={salong.booking}
-            target="_blank"
-            rel="noopener"
-            className="mt-7 inline-flex rounded-full bg-paper px-6 py-3 text-sm font-medium text-void transition-colors hover:bg-brass-lit"
-          >
-            Book time
-          </a>
         </div>
 
-        <nav aria-label="Bunnmeny">
-          <h2 className="kicker mb-5">Sider</h2>
+        <div>
+          <h2 className="kicker mb-5">Tjenester</h2>
           <ul className="flex flex-col gap-3 text-sm">
-            {navigasjon.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="text-ash transition-colors hover:text-paper">
-                  {l.tekst}
+            {footer.tjenester.map((t) => (
+              <li key={t}>
+                <a href="#tjenester" className="text-ash transition-colors hover:text-paper">
+                  {t}
                 </a>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
 
         <div>
-          <h2 className="kicker mb-5">Åpent</h2>
+          <h2 className="kicker mb-5">Sider</h2>
           <ul className="flex flex-col gap-3 text-sm">
+            {footer.sider.map((s) => (
+              <li key={s.tekst}>
+                <a href={s.href} className="text-ash transition-colors hover:text-paper">
+                  {s.tekst}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <h2 className="kicker mb-4 mt-8">Åpningstider</h2>
+          <ul className="flex flex-col gap-2.5 text-sm">
             {apningstider.map((a) => (
               <li key={a.dag} className="flex items-baseline justify-between gap-4">
                 <span className="text-ash">{a.dag}</span>
@@ -45,31 +49,49 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <ul className="mt-6 flex flex-col gap-3 text-sm">
+        </div>
+
+        <div>
+          <h2 className="kicker mb-5">Kontakt</h2>
+          <ul className="flex flex-col gap-3 text-sm">
             <li>
               <a href={`tel:${salong.telefonE164}`} className="font-mono text-paper transition-colors hover:text-brass-lit">
                 {salong.telefon}
               </a>
             </li>
             <li>
-              <a href={`mailto:${salong.epost}`} className="text-ash transition-colors hover:text-paper">
+              <a href={`mailto:${salong.epost}`} className="break-words text-ash transition-colors hover:text-paper">
                 {salong.epost}
+              </a>
+            </li>
+            <li>
+              <a href={salong.kart} target="_blank" rel="noopener" className="text-ash transition-colors hover:text-paper">
+                {salong.gate}, {salong.postnr} {salong.by}
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t hairline pt-6">
+      <p className="mt-14 text-center text-xs text-steel-2">
+        {footer.kreditt}{" "}
+        <a href="https://medcom.no" target="_blank" rel="noopener" className="underline transition-colors hover:text-ash">
+          Medcom
+        </a>
+        .
+      </p>
+
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t hairline pt-6">
         <p className="font-mono text-xs text-steel-2">
-          © {new Date().getFullYear()} {salong.navn}
+          © {new Date().getFullYear()} {footer.rettigheter}
         </p>
-        <p className="font-mono text-xs text-steel-2">
-          Utviklet med{" "}
-          <a href="https://medcom.no" target="_blank" rel="noopener" className="text-ash transition-colors hover:text-paper">
-            Medcom
-          </a>
-        </p>
+        <ul className="flex gap-5">
+          {footer.juridisk.map((j) => (
+            <li key={j}>
+              <span className="font-mono text-xs text-steel-2">{j}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </footer>
   );

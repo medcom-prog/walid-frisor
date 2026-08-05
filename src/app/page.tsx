@@ -1,8 +1,8 @@
 import Header from "@/komponenter/Header";
 import Hero from "@/komponenter/Hero";
-import Handverk from "@/komponenter/Handverk";
+import OmOss from "@/komponenter/OmOss";
 import Tjenester from "@/komponenter/Tjenester";
-import Anmeldelser from "@/komponenter/Anmeldelser";
+import Priser from "@/komponenter/Priser";
 import Booking from "@/komponenter/Booking";
 import Kontakt from "@/komponenter/Kontakt";
 import Footer from "@/komponenter/Footer";
@@ -21,9 +21,9 @@ export default function Forside() {
 
       <main id="hovedinnhold">
         <Hero />
-        <Handverk />
+        <OmOss />
         <Tjenester />
-        <Anmeldelser />
+        <Priser />
         <Booking />
         <Kontakt />
       </main>

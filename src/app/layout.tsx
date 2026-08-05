@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
-import { salong, tjenester } from "@/lib/innhold";
+import { salong, meta, priser } from "@/lib/innhold";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -26,11 +26,10 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(salong.domene),
   title: {
-    default: "Walid Frisør – barbershop i Larvik",
+    default: meta.tittel,
     template: "%s · Walid Frisør",
   },
-  description:
-    "Fades, klassisk klipp og skjeggforming i Olavs gate 3, Larvik. Book time på nett – eller stikk innom. 5,0 i snitt av kundene våre.",
+  description: meta.beskrivelse,
   keywords: ["frisør Larvik", "barbershop Larvik", "skin fade", "herreklipp", "skjeggtrim"],
   alternates: { canonical: "/" },
   openGraph: {
@@ -38,15 +37,14 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     url: salong.domene,
     siteName: salong.navn,
-    title: "Walid Frisør – barbershop i Larvik",
-    description:
-      "Fades, klassisk klipp og skjeggforming i Olavs gate 3, Larvik. Book time på nett.",
+    title: meta.tittel,
+    description: meta.beskrivelse,
     images: [{ url: "/walid-og-1200x630.jpg", width: 1200, height: 630, alt: salong.navn }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Walid Frisør – barbershop i Larvik",
-    description: "Fades, klassisk klipp og skjeggforming i Larvik. Book time på nett.",
+    title: meta.tittel,
+    description: meta.beskrivelse,
     images: ["/walid-og-1200x630.jpg"],
   },
   icons: {
@@ -86,29 +84,23 @@ function StrukturerteData() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday"],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "10:00",
-        closes: "17:00",
+        closes: "19:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "08:00",
-        closes: "17:00",
+        dayOfWeek: ["Saturday"],
+        opens: "10:00",
+        closes: "16:00",
       },
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "10",
-      bestRating: "5",
-    },
-    makesOffer: tjenester
-      .filter((t) => t.pris !== "Etter avtale")
-      .map((t) => ({
+    makesOffer: priser.kort
+      .filter((k) => /^kr|^fra kr/.test(k.pris))
+      .map((k) => ({
         "@type": "Offer",
-        itemOffered: { "@type": "Service", name: t.navn },
-        price: t.pris,
+        itemOffered: { "@type": "Service", name: k.navn },
+        price: k.pris.replace(/[^0-9]/g, ""),
         priceCurrency: "NOK",
       })),
     potentialAction: {
