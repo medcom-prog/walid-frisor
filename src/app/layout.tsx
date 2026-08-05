@@ -84,15 +84,21 @@ function StrukturerteData() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Saturday"],
+        opens: "10:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Thursday", "Friday"],
         opens: "10:00",
         closes: "19:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday"],
-        opens: "10:00",
-        closes: "16:00",
+        dayOfWeek: ["Sunday"],
+        opens: "00:00",
+        closes: "00:00",
       },
     ],
     makesOffer: priser.kort

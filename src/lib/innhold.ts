@@ -174,7 +174,7 @@ export const booking = {
 export const kontakt = {
   merkelapp: "Kontakt oss",
   tittel: "Finn veien til oss",
-  apningstidLinje: "Åpningstider (eksempel): Man–fre 10–19 · Lør 10–16 · Søn stengt.",
+  apningstidLinje: "Man–ons 10–18 · Tor–fre 10–19 · Lør 10–18 · Søndag stengt.",
   kort: [
     {
       tittel: "Ring oss",
@@ -236,9 +236,27 @@ export const anmeldelser = {
   ] as Anmeldelse[],
 } as const;
 
+/**
+ * Salongens faktiske åpningstider, oppgitt av Walid.
+ *
+ * Merk at dette ikke er det samme som tidene i Setmore – de styrer kun
+ * hvilke tider som kan bookes på nett, og skal ikke endres etter denne.
+ */
 export const apningstider = [
-  { dag: "Man–fre", tid: "10–19" },
-  { dag: "Lørdag", tid: "10–16" },
+  { dag: "Mandag", tid: "10–18", stengt: false },
+  { dag: "Tirsdag", tid: "10–18", stengt: false },
+  { dag: "Onsdag", tid: "10–18", stengt: false },
+  { dag: "Torsdag", tid: "10–19", stengt: false },
+  { dag: "Fredag", tid: "10–19", stengt: false },
+  { dag: "Lørdag", tid: "10–18", stengt: false },
+  { dag: "Søndag", tid: "Stengt", stengt: true },
+] as const;
+
+/** Kortform til steder med lite plass. */
+export const apningstiderKort = [
+  { dag: "Man–ons", tid: "10–18" },
+  { dag: "Tor–fre", tid: "10–19" },
+  { dag: "Lørdag", tid: "10–18" },
   { dag: "Søndag", tid: "Stengt" },
 ] as const;
 

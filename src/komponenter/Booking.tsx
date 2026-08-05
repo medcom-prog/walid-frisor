@@ -1,4 +1,4 @@
-import { salong, booking, apningstider } from "@/lib/innhold";
+import { salong, booking, apningstiderKort } from "@/lib/innhold";
 import Avslor from "./Avslor";
 
 /**
@@ -42,9 +42,9 @@ export default function Booking() {
               </span>
 
               <span className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
-                {apningstider.map((a) => (
+                {apningstiderKort.map((a) => (
                   <span key={a.dag} className="font-mono text-xs text-ash">
-                    {a.dag} <span className="text-ash">{a.tid}</span>
+                    {a.dag} <span className="text-paper">{a.tid}</span>
                   </span>
                 ))}
               </span>
