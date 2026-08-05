@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     scope: "/",
     display: "standalone",
-    background_color: "#0B0B0C",
+    background_color: "#FBFAF9",
     theme_color: "#0B0B0C",
     icons: [
       { src: "/ikoner/walid-192.png", sizes: "192x192", type: "image/png" },

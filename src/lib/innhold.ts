@@ -22,12 +22,12 @@ export const meta = {
     "Walid Frisør i Larvik tilbyr klassisk herreklipp, moderne fades, skjegg/linjer og barbering. Enkelt å booke time – kvalitet uten kompromiss.",
 } as const;
 
+/** "Book" er utelatt med vilje – knappen "Book time her" dekker det. */
 export const navigasjon = [
   { href: "#hjem", tekst: "Hjem" },
   { href: "#om-oss", tekst: "Om oss" },
   { href: "#tjenester", tekst: "Tjenester" },
   { href: "#priser", tekst: "Priser" },
-  { href: "#book", tekst: "Book" },
   { href: "#kontakt", tekst: "Kontakt" },
 ] as const;
 

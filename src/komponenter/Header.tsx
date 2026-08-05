@@ -58,16 +58,26 @@ export default function Header() {
           scrollet ? "hairline bg-void/85 backdrop-blur-xl" : "border-transparent bg-transparent"
         }`}
       >
-        <a href="#hjem" className="flex items-center gap-3" aria-label={`${salong.navn} – til toppen`}>
-          <Image
-            src="/bilder/logo-132.webp"
-            alt=""
-            width={61}
-            height={132}
-            className="h-10 w-auto"
-            priority
-          />
-          <span className="font-display text-lg tracking-tight text-paper">
+        <a
+          href="#hjem"
+          className="flex shrink-0 items-center gap-2.5 sm:gap-3"
+          aria-label={`${salong.navn} – til toppen`}
+        >
+          {/* Merket er svart med gjennomsiktig bakgrunn, så det trenger en lys
+              flate for å synes. Fargene i logoen er urørt – den ligger bare på
+              en hvit skive. Originalfila hadde mye tomrom, som er trimmet bort
+              så merket kan vises stort uten å bli uskarpt. */}
+          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-paper ring-1 ring-white/15 sm:h-16 sm:w-16">
+            <Image
+              src="/bilder/merke-192.webp"
+              alt=""
+              width={192}
+              height={192}
+              className="h-11 w-11 sm:h-[3.25rem] sm:w-[3.25rem]"
+              priority
+            />
+          </span>
+          <span className="font-display text-lg tracking-tight text-paper sm:text-xl">
             Walid<span className="text-brass"> Frisør</span>
           </span>
         </a>
