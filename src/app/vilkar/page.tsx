@@ -5,7 +5,7 @@ import { salong } from "@/lib/innhold";
 export const metadata: Metadata = {
   title: "Vilkår",
   description:
-    "Vilkår for booking, avbestilling og manglende oppmøte hos Walid Frisør i Larvik.",
+    "Vilkår for booking, avbestilling og oppmøte hos Walid Frisør i Larvik.",
   robots: { index: true, follow: true },
   alternates: { canonical: "/vilkar" },
 };
@@ -45,13 +45,11 @@ export default function Vilkar() {
 
       <Bolk tittel="Manglende oppmøte">
         <p>
-          Møter du ikke opp uten å gi beskjed, påløper et gebyr på{" "}
-          <strong>100 kr</strong>. En uteblitt time er en time vi ikke kunne gitt til noen
-          andre.
+          Rekker du ikke timen, setter vi pris på en beskjed. En uteblitt time er en
+          time vi ikke kunne gitt til noen andre.
         </p>
         <p>
-          Gi oss heller en beskjed – da finner vi et nytt tidspunkt, og det koster deg
-          ingenting.
+          Gi oss et vink, så finner vi et nytt tidspunkt. Det koster deg ingenting.
         </p>
       </Bolk>
 
