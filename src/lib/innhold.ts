@@ -118,13 +118,15 @@ export const tjenester = {
 export const priser = {
   merkelapp: "Priser",
   tittel: "Rettferdige priser – tydelig oppsett",
-  beskrivelse: "",
+  beskrivelse:
+    "Booket time er satt av til deg alene. Drop-in tar vi når stolen er ledig, til lavere pris.",
   kort: [
     {
       navn: "Klassisk klipp",
       beskrivelse:
         "Klipp som graderes med saks, gir en mykere look på graderingen, og gir håret bedre volum.",
-      pris: "kr 350",
+      pris: "kr 450",
+      prisDropIn: "kr 350",
       bilde: "/bilder/classic-cut-900.webp",
       bredde: 900,
       hoyde: 1200,
@@ -133,7 +135,8 @@ export const priser = {
       navn: "Taper fade",
       beskrivelse:
         "Klipp som gir en god look, som varer. For deg som vil ha lengre hår på toppen, men samtidig få en fin overgang til kortere hår på sidene og nakken.",
-      pris: "kr 350",
+      pris: "kr 450",
+      prisDropIn: "kr 350",
       bilde: "/bilder/taper-fade-900.webp",
       bredde: 900,
       hoyde: 1259,
@@ -142,7 +145,8 @@ export const priser = {
       navn: "Skin fade",
       beskrivelse:
         "Klipp som gir en skarp overgang fra huden, til den ønskede lengden på toppen. Tydelig og skarp overgang mellom kort og langt hår.",
-      pris: "kr 350",
+      pris: "kr 450",
+      prisDropIn: "kr 350",
       bilde: "/bilder/skin-fade-900.webp",
       bredde: 900,
       hoyde: 1200,
@@ -151,7 +155,8 @@ export const priser = {
       navn: "Gradering",
       beskrivelse:
         "Håret klippes i ulike lengder. Overgangen er gradvis, fra kort til langt. Ingen skarpe overganger, alt ser jevnt ut.",
-      pris: "kr 350",
+      pris: "kr 450",
+      prisDropIn: "kr 350",
       bilde: "/bilder/gradering-900.webp",
       bredde: 900,
       hoyde: 1200,
@@ -160,6 +165,7 @@ export const priser = {
       navn: "Skjegg trim",
       beskrivelse: "Trimming og styling av skjegg tilpasset ønsket stil og lengde.",
       pris: "fra kr 150",
+      prisDropIn: null as string | null,
       bilde: "/bilder/beard-trim-500.webp",
       bredde: 500,
       hoyde: 333,
@@ -168,6 +174,7 @@ export const priser = {
       navn: "Skreddersydd klipp",
       beskrivelse: "Fortell oss hva du ønsker – vi tilpasser klipp og finish til din stil.",
       pris: "Pris etter avtale",
+      prisDropIn: null,
       bilde: "/bilder/hero-bg-900.webp",
       bredde: 900,
       hoyde: 1125,

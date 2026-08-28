@@ -31,9 +31,26 @@ export default function Priser() {
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="font-display text-h3 text-paper">{k.navn}</h3>
                 <p className="mt-2.5 flex-1 text-sm leading-relaxed text-ash">{k.beskrivelse}</p>
-                <p className="mt-5 border-t hairline pt-4 font-mono text-lg text-paper tabular-nums">
-                  {k.pris}
-                </p>
+                {/* To priser der de finnes: booket time koster mer fordi
+                    tiden settes av, drop-in tas når stolen er ledig. */}
+                <div className="mt-5 border-t hairline pt-4">
+                  <p className="flex items-baseline justify-between gap-3">
+                    <span className="font-mono text-lg text-paper tabular-nums">{k.pris}</span>
+                    {k.prisDropIn && (
+                      <span className="font-mono text-[0.66rem] uppercase tracking-widest text-ash">
+                        Booket
+                      </span>
+                    )}
+                  </p>
+                  {k.prisDropIn && (
+                    <p className="mt-1.5 flex items-baseline justify-between gap-3">
+                      <span className="font-mono text-base text-ash tabular-nums">{k.prisDropIn}</span>
+                      <span className="font-mono text-[0.66rem] uppercase tracking-widest text-ash">
+                        Drop-in
+                      </span>
+                    </p>
+                  )}
+                </div>
               </div>
             </article>
           </Avslor>

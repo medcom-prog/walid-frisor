@@ -70,7 +70,7 @@ function StrukturerteData() {
     image: `${salong.domene}/walid-og-1200x630.jpg`,
     telephone: salong.telefonE164,
     email: salong.epost,
-    priceRange: "kr 150 – kr 350",
+    priceRange: "kr 150 – kr 450",
     currenciesAccepted: "NOK",
     address: {
       "@type": "PostalAddress",
@@ -101,14 +101,21 @@ function StrukturerteData() {
         closes: "00:00",
       },
     ],
+    // Drop-in-prisen tas med der den finnes, så Google ikke bare viser den høyeste
     makesOffer: priser.kort
       .filter((k) => /^kr|^fra kr/.test(k.pris))
-      .map((k) => ({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: k.navn },
-        price: k.pris.replace(/[^0-9]/g, ""),
-        priceCurrency: "NOK",
-      })),
+      .flatMap((k) => {
+        const tilbud = (pris: string, variant: string) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: k.navn },
+          name: `${k.navn} – ${variant}`,
+          price: pris.replace(/[^0-9]/g, ""),
+          priceCurrency: "NOK",
+        });
+        return k.prisDropIn
+          ? [tilbud(k.pris, "booket time"), tilbud(k.prisDropIn, "drop-in")]
+          : [tilbud(k.pris, "ordinær")];
+      }),
     potentialAction: {
       "@type": "ReserveAction",
       target: {
