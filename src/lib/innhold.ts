@@ -296,3 +296,21 @@ export const footer = {
     { tekst: "Informasjonskapsler", href: "/informasjonskapsler" },
   ],
 } as const;
+
+/**
+ * Korte klipp fra salongen, hentet fra Walids egne opptak.
+ *
+ * Filene er kuttet til under seks sekunder, skalert til 720x1280 og
+ * strippet for lyd. De lastes ikke med siden – se Film.tsx.
+ */
+export const film = {
+  merkelapp: "Fra stolen",
+  tittel: "Noen sekunder fra salongen",
+  beskrivelse:
+    "Korte klipp av ferdig arbeid. De er uten lyd, og starter først når du ruller hit.",
+  klipp: [
+    { fil: "/film/klipp-1.mp4", plakat: "/film/klipp-1-plakat.webp", tekst: "Ferdig fade i profil" },
+    { fil: "/film/klipp-2.mp4", plakat: "/film/klipp-2-plakat.webp", tekst: "Overgang mot skjegget" },
+    { fil: "/film/klipp-3.mp4", plakat: "/film/klipp-3-plakat.webp", tekst: "Tekstur på toppen" },
+  ],
+} as const;

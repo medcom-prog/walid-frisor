@@ -47,8 +47,8 @@ export default function OmOss() {
         <Avslor forsinkelse={100}>
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl border hairline">
             <Image
-              src="/bilder/classic-cut-1400.webp"
-              alt="Frisørstol i salongen"
+              src="/bilder/salong-1080.webp"
+              alt="Vaskeplassene og loungen i salongen"
               fill
               sizes="(max-width: 1024px) 92vw, 46vw"
               className="object-cover"

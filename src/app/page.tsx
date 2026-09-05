@@ -3,6 +3,7 @@ import Hero from "@/komponenter/Hero";
 import OmOss from "@/komponenter/OmOss";
 import Tjenester from "@/komponenter/Tjenester";
 import Priser from "@/komponenter/Priser";
+import Film from "@/komponenter/Film";
 import Anmeldelser from "@/komponenter/Anmeldelser";
 import Booking from "@/komponenter/Booking";
 import Kontakt from "@/komponenter/Kontakt";
@@ -25,6 +26,7 @@ export default function Forside() {
         <OmOss />
         <Tjenester />
         <Priser />
+        <Film />
         <Anmeldelser />
         <Booking />
         <Kontakt />
