@@ -129,7 +129,7 @@ export const priser = {
       prisDropIn: "kr 350",
       bilde: "/bilder/klassisk-klipp-900.webp",
       bredde: 900,
-      hoyde: 675,
+      hoyde: 1200,
     },
     {
       navn: "Taper fade",
