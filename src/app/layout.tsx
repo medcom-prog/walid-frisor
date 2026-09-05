@@ -47,10 +47,6 @@ export const metadata: Metadata = {
     description: meta.beskrivelse,
     images: ["/walid-og-1200x630.jpg"],
   },
-  icons: {
-    icon: "/ikoner/favicon.ico",
-    apple: "/ikoner/walid-180.png",
-  },
   manifest: "/manifest.webmanifest",
   robots: { index: true, follow: true },
 };
