@@ -166,9 +166,9 @@ export const priser = {
       beskrivelse: "Trimming og styling av skjegg tilpasset ønsket stil og lengde.",
       pris: "fra kr 150",
       prisDropIn: null as string | null,
-      bilde: "/bilder/beard-trim-500.webp",
-      bredde: 500,
-      hoyde: 333,
+      bilde: "/bilder/skjegg-trim-900.webp",
+      bredde: 900,
+      hoyde: 1200,
     },
     {
       navn: "Skreddersydd klipp",
