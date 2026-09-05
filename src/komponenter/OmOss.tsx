@@ -51,7 +51,7 @@ export default function OmOss() {
               alt="Frisørstol i salongen"
               fill
               sizes="(max-width: 1024px) 92vw, 46vw"
-              className="object-cover grayscale"
+              className="object-cover"
             />
           </div>
         </Avslor>

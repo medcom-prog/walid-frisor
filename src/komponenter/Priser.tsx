@@ -24,7 +24,7 @@ export default function Priser() {
                   alt={k.navn}
                   fill
                   sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
-                  className="object-cover grayscale transition-transform duration-700 ease-[cubic-bezier(.22,.61,.36,1)] group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(.22,.61,.36,1)] group-hover:scale-105"
                 />
               </div>
 

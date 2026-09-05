@@ -21,7 +21,7 @@ export default function Kart() {
           title={`Kart til ${salong.navn}`}
           src={kartEmbed}
           referrerPolicy="no-referrer-when-downgrade"
-          className="block h-64 w-full border-0 grayscale"
+          className="block h-64 w-full border-0"
         />
       </div>
     );
