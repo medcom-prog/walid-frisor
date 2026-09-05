@@ -127,9 +127,9 @@ export const priser = {
         "Klipp som graderes med saks, gir en mykere look på graderingen, og gir håret bedre volum.",
       pris: "kr 450",
       prisDropIn: "kr 350",
-      bilde: "/bilder/classic-cut-900.webp",
+      bilde: "/bilder/klassisk-klipp-900.webp",
       bredde: 900,
-      hoyde: 1200,
+      hoyde: 675,
     },
     {
       navn: "Taper fade",
