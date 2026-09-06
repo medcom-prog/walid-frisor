@@ -112,17 +112,20 @@ export default function Hero() {
           </dl>
         </div>
 
+        {/* Bildet er klippet ut av bakgrunnen og har alfakanal, så sidens
+            egen farge står bak. Da skal det ikke ligge i en ramme heller –
+            de to figurene får stå fritt. */}
         <div
-          className="relative aspect-[4/5] overflow-hidden rounded-2xl border hairline sm:aspect-[3/4] lg:aspect-[4/5]"
+          className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
           style={{ animation: "stig-opp 1s cubic-bezier(.22,.61,.36,1) .28s both" }}
         >
           <Image
-            src="/bilder/hero-salong-1200.webp"
+            src="/bilder/hero-utklipp-1000.webp"
             alt="Frisør i arbeid hos Walid Frisør"
             fill
             priority
             sizes="(max-width: 1024px) 92vw, 44vw"
-            className="object-cover object-[50%_30%]"
+            className="object-contain object-bottom"
           />
         </div>
       </div>
