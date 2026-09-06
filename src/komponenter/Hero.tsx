@@ -117,7 +117,7 @@ export default function Hero() {
           style={{ animation: "stig-opp 1s cubic-bezier(.22,.61,.36,1) .28s both" }}
         >
           <Image
-            src="/bilder/hero-salong-1600.webp"
+            src="/bilder/hero-salong-1200.webp"
             alt="Frisør i arbeid hos Walid Frisør"
             fill
             priority

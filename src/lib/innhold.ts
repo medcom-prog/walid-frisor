@@ -309,8 +309,8 @@ export const film = {
   beskrivelse:
     "Korte klipp av ferdig arbeid. De er uten lyd, og starter først når du ruller hit.",
   klipp: [
-    { fil: "/film/klipp-1.mp4", plakat: "/film/klipp-1-plakat.webp", tekst: "Ferdig fade i profil" },
-    { fil: "/film/klipp-2.mp4", plakat: "/film/klipp-2-plakat.webp", tekst: "Overgang mot skjegget" },
-    { fil: "/film/klipp-3.mp4", plakat: "/film/klipp-3-plakat.webp", tekst: "Tekstur på toppen" },
+    { fil: "/film/klipp-1.mp4", plakat: "/film/klipp-1-plakat.webp", tekst: "Fade og skjeggkant" },
+    { fil: "/film/klipp-2.mp4", plakat: "/film/klipp-2-plakat.webp", tekst: "Krøller på toppen, korte sider" },
+    { fil: "/film/klipp-3.mp4", plakat: "/film/klipp-3-plakat.webp", tekst: "Kappa på, timen begynner" },
   ],
 } as const;
