@@ -66,7 +66,7 @@ function StrukturerteData() {
     image: `${salong.domene}/walid-og-1200x630.jpg`,
     telephone: salong.telefonE164,
     email: salong.epost,
-    priceRange: "kr 150 – kr 450",
+    priceRange: "kr 150 – kr 700",
     currenciesAccepted: "NOK",
     address: {
       "@type": "PostalAddress",
