@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { hero } from "@/lib/innhold";
+import Videoflate from "./Videoflate";
 
 /** Teller opp til måltallet når heroen er i bildet. Viser sluttverdien uten JS. */
 function Telleverk({ til, suffiks, desimaler }: { til: number; suffiks: string; desimaler: number }) {
@@ -112,22 +113,36 @@ export default function Hero() {
           </dl>
         </div>
 
-        {/* Bildet er klippet ut av bakgrunnen og har alfakanal, så sidens
-            egen farge står bak. Da skal det ikke ligge i en ramme heller –
-            de to figurene får stå fritt. */}
-        <div
-          className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
-          style={{ animation: "stig-opp 1s cubic-bezier(.22,.61,.36,1) .28s both" }}
-        >
-          <Image
-            src="/bilder/hero-utklipp-1000.webp"
-            alt="Frisør i arbeid hos Walid Frisør"
-            fill
-            priority
-            sizes="(max-width: 1024px) 92vw, 44vw"
-            className="object-contain object-bottom"
-          />
-        </div>
+        {hero.video ? (
+          // Plakaten er LCP og lastes med prioritet. Selve videoen hentes
+          // først etter at siden er ferdig lastet – se Videoflate.
+          <div style={{ animation: "stig-opp 1s cubic-bezier(.22,.61,.36,1) .28s both" }}>
+            <Videoflate
+              video={hero.video}
+              alt="Walid i arbeid i salongen"
+              sizes="(max-width: 1024px) 92vw, 44vw"
+              prioritet
+              className="aspect-[4/5] rounded-xl border hairline"
+            />
+          </div>
+        ) : (
+          /* Bildet er klippet ut av bakgrunnen og har alfakanal, så sidens
+             egen farge står bak. Da skal det ikke ligge i en ramme heller –
+             de to figurene får stå fritt. */
+          <div
+            className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5]"
+            style={{ animation: "stig-opp 1s cubic-bezier(.22,.61,.36,1) .28s both" }}
+          >
+            <Image
+              src="/bilder/hero-utklipp-1000.webp"
+              alt="Frisør i arbeid hos Walid Frisør"
+              fill
+              priority
+              sizes="(max-width: 1024px) 92vw, 44vw"
+              className="object-contain object-bottom"
+            />
+          </div>
+        )}
       </div>
     </section>
   );

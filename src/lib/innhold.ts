@@ -42,6 +42,12 @@ export const kartEmbed = `https://www.google.com/maps?q=${encodeURIComponent(kar
  */
 export const formspreeEndepunkt = "https://formspree.io/f/mjkoqgvn";
 
+/**
+ * En stum bakgrunnsvideo, laget med skript/lag-video.mjs.
+ * Plakaten vises til videoen spiller – og alene når den ikke kan det.
+ */
+export type Video = { desktop: string; mobil: string; plakat: string };
+
 export const meta = {
   tittel: "Walid Frisør – Klipp, fade & barbering i Larvik",
   beskrivelse:
@@ -64,6 +70,8 @@ export const hero = {
   beskrivelse:
     "Klassisk herreklipp, moderne fades, presis skjeggforming og barbering. Hos Walid Frisør i Larvik handler alt om detaljer – og at du går ut døren med selvtillit.",
   knapper: { book: "Book time", priser: "Se priser" },
+  /** Når denne er satt, erstatter videoen utklippsbildet. Format 4:5. */
+  video: null as Video | null,
   tall: [
     { til: 10, suffiks: "+", desimaler: 0, merke: "År erfaring" },
     { til: 4.9, suffiks: "", desimaler: 1, merke: "Kundetilfredshet" },
@@ -83,6 +91,8 @@ export const omOss = {
     { tittel: "Barbering", tekst: "Varme håndklær og skarp finish" },
     { tittel: "Kundefokus", tekst: "Ryddig, ærlig og profesjonelt – alltid" },
   ],
+  /** Video av salongen. Erstatter bildet når den er satt. Format 4:3. */
+  video: null as Video | null,
 } as const;
 
 export const tjenester = {
@@ -130,6 +140,7 @@ export const priser = {
       bilde: "/bilder/klassisk-klipp-900.webp",
       bredde: 900,
       hoyde: 1200,
+      video: null as Video | null,
     },
     {
       navn: "Taper fade",
@@ -140,6 +151,7 @@ export const priser = {
       bilde: "/bilder/taper-fade-900.webp",
       bredde: 900,
       hoyde: 1259,
+      video: null as Video | null,
     },
     {
       navn: "Skin fade",
@@ -150,6 +162,7 @@ export const priser = {
       bilde: "/bilder/skin-fade-900.webp",
       bredde: 900,
       hoyde: 1200,
+      video: null as Video | null,
     },
     {
       navn: "Gradering",
@@ -160,6 +173,7 @@ export const priser = {
       bilde: "/bilder/gradering-900.webp",
       bredde: 900,
       hoyde: 1200,
+      video: null as Video | null,
     },
     {
       navn: "Skjegg trim",
@@ -169,15 +183,19 @@ export const priser = {
       bilde: "/bilder/skjegg-trim-900.webp",
       bredde: 900,
       hoyde: 1200,
+      video: null as Video | null,
     },
     {
-      navn: "Skreddersydd klipp",
-      beskrivelse: "Fortell oss hva du ønsker – vi tilpasser klipp og finish til din stil.",
-      pris: "Pris etter avtale",
+      navn: "Premium-pakke",
+      beskrivelse:
+        "Hele opplevelsen i én stol: klipp etter ønske, skjeggtrim og ansiktsspa med varmt håndkle og pleiende krem.",
+      inkluderer: ["Klipp", "Skjeggtrim", "Ansiktsspa med varmt håndkle og krem"],
+      pris: "kr 700",
       prisDropIn: null,
       bilde: "/bilder/hero-bg-900.webp",
       bredde: 900,
       hoyde: 1125,
+      video: null as Video | null,
     },
   ],
 } as const;

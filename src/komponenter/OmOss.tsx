@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { omOss } from "@/lib/innhold";
 import Avslor from "./Avslor";
+import Videoflate from "./Videoflate";
 
 const ikoner = [
   <path key="s" d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm0 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12" />,
@@ -45,15 +46,24 @@ export default function OmOss() {
         </Avslor>
 
         <Avslor forsinkelse={100}>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border hairline">
-            <Image
-              src="/bilder/salong-1080.webp"
-              alt="Vaskeplassene og loungen i salongen"
-              fill
+          {omOss.video ? (
+            <Videoflate
+              video={omOss.video}
+              alt="Salongen til Walid Frisør"
               sizes="(max-width: 1024px) 92vw, 46vw"
-              className="object-cover"
+              className="aspect-[4/3] rounded-xl border hairline"
             />
-          </div>
+          ) : (
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl border hairline">
+              <Image
+                src="/bilder/salong-1080.webp"
+                alt="Vaskeplassene og loungen i salongen"
+                fill
+                sizes="(max-width: 1024px) 92vw, 46vw"
+                className="object-cover"
+              />
+            </div>
+          )}
         </Avslor>
       </div>
     </section>
