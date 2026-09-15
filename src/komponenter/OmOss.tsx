@@ -46,12 +46,14 @@ export default function OmOss() {
         </Avslor>
 
         <Avslor forsinkelse={100}>
+          {/* Videoen er filmet stående. Bredden holdes nede så den ikke blir
+              mye høyere enn tekstkolonnen ved siden av. */}
           {omOss.video ? (
             <Videoflate
               video={omOss.video}
               alt="Salongen til Walid Frisør"
-              sizes="(max-width: 1024px) 92vw, 46vw"
-              className="aspect-[4/3] rounded-xl border hairline"
+              sizes="(max-width: 640px) 92vw, 34rem"
+              className="mx-auto aspect-[4/5] w-full max-w-[34rem] rounded-xl border hairline lg:mr-0"
             />
           ) : (
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border hairline">

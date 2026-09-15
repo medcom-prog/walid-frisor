@@ -91,8 +91,16 @@ export const omOss = {
     { tittel: "Barbering", tekst: "Varme håndklær og skarp finish" },
     { tittel: "Kundefokus", tekst: "Ryddig, ærlig og profesjonelt – alltid" },
   ],
-  /** Video av salongen. Erstatter bildet når den er satt. Format 4:3. */
-  video: null as Video | null,
+  /**
+   * Rundtur i salongen, satt sammen av de fire best belyste partiene i
+   * IMG_1117.MOV (stoler, ringlys, skiltet ved vaskene, produktveggen).
+   * Stabilisert og uten lyd. Format 4:5 – opptaket er stående.
+   */
+  video: {
+    desktop: "/video/salong-desktop.mp4",
+    mobil: "/video/salong-mobil.mp4",
+    plakat: "/video/salong-plakat.jpg",
+  } as Video | null,
 } as const;
 
 export const tjenester = {
